@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
-
 * {
-    font-family: Raleway;
+    font-family: 'Raleway', sans-serif;
+
+    /* border: 1px solid red; */
 }
 
 body {
@@ -17,11 +17,189 @@ body {
     padding: 10px;
 }
 
-dialog {
-    height: 500px;
+.title-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.7rem;
+    align-items: center;
+}
+
+.title {
+    padding-left: 20px;
+}
+
+.close-modal-button {
+    height: 25px;
+    padding: 10px;
+}
+
+.close-modal-button:hover {
+    filter: brightness(2);
+}
+
+dialog[open] {
+    height: 420px;
     width: 400px;
+    gap: 20px;
+
+    border: 3px solid rgba(85, 84, 84, 0.692);
+    border-radius: 10px;
+}
+
+.input-form {
+    align-items: center;
+    gap: 20px;
+}
+
+.form-container input {
+    padding-top: 15px;
+    width: 351px;
+}
+
+.form-container input:focus {
+    outline:none;
+}
+
+.form-container input, 
+.form-container select {
+    background-color: #fff;
+    height: 45px;
+    padding-left: 10px;
+
+    border: 1px solid #d8d8d8;
+}
+
+.form-container label {
+    font-size: 12px;
+    padding: 5px 10px 0;
+    color: #8BC34A;
+    position: absolute;
+    display: none;
+
+    animation: silo-fade 0.2s;
 }
 
 .modal::backdrop {
     background-color: rgba(99, 99, 99, 0.74);
+}
+
+.form-container {
+    height: 45px;
+}
+
+select {
+    width: 365px;
+}
+
+.form-container, .input-form, dialog[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+.pass-validation-container {
+    display: flex;
+    width: 365px;
+    justify-content:space-evenly;
+}
+
+.validation-item {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.validation-icon {
+    height: 23px;
+}
+
+span {
+    color: #b92326;
+}
+
+.valid {
+    color: #8BC34A;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* Animations */
+
+@keyframes silo-fade {
+    0% {
+        opacity: 0;
+        -o-transform: translateY(-1.4em);
+        transform: translateY(-1.4em);
+    }
+    100% {
+        opacity: 1;
+        -o-transform: translateY(0);
+        transform: translateY(0);
+    }
+}
+
+@keyframes silo-help {
+    0% {
+        opacity: 0;
+    }
+    4% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.form-container input:focus + label,
+.form-container input:not(:placeholder-shown) + label {
+    display: block;
+}
+
+.form-container input:invalid {
+    border: 1px solid #b92326;
+    background-color: rgba(185, 35, 38, 0.25);
+}
+
+.form-container input:focus:invalid {
+    border: 1px solid #b92326;
+    background-color: transparent;
+}
+
+.form-container input:invalid + label {
+    color: #b92326;
+}
+
+.form-container input:focus:invalid + label:after {
+    content: " (" attr(data-help) ")";
+    animation: silo-help 100s;
+}
+
+.form-container input:invalid + label:after {
+    content: " (" attr(data-help) ")";
+}
+
+.form-container input:valid {
+    border: 1px solid #8BC34A;
+    background-color: rgba(139, 195, 74, 0.25);
+}
+
+.form-container input:focus:valid {
+    border: 1px solid #8BC34A;
+    background-color: transparent;
+}
+
+.form-container input:placeholder-shown {
+    background-color: transparent;
+    border: 1px solid #d8d8d8;
+}
+
+.form-container input:focus::placeholder {
+    color: transparent;
 }
