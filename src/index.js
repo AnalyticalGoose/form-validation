@@ -1,16 +1,16 @@
 const modal = document.querySelector('.modal')
 const modalBtn = document.querySelector('.modal-button')
 const closemodalBtn = document.querySelector('.close-modal-button')
-
 const password = document.getElementById('password')
 const passwordConfirm = document.getElementById('confirm')
-
 const validationContainer = document.querySelector('.pass-validation-container')
 
+// to-do - eye to view passwords
+//       - more robust email regex
+//       - form submission
 
 modalBtn.addEventListener('click', () => {modal.showModal()})
 closemodalBtn.addEventListener('click', () => {modal.close()})
-
 
 password.addEventListener('focus', () => {
     validationContainer.classList.remove('hidden')
@@ -22,11 +22,12 @@ password.addEventListener('focusout', () => {
 
 password.addEventListener('input', () => {
     validatePassword()
+    checkPasswordsMatch()
 })
 
-let lower = false
-let upper = false
-let special = false
+passwordConfirm.addEventListener('input', () => {
+    checkPasswordsMatch()
+})
 
 function validatePassword() {
     const lowerContainer = document.getElementById('validate-lower')
@@ -37,40 +38,21 @@ function validatePassword() {
     let containsUpper = /[A-Z]/.test(password.value)
     let containsSpecial = /[0-9`¬|!"£$€%^&*()\-_=+{}[\];:'@#~\\,<>./?]/.test(password.value)
 
-    if (containsLower!= lower) {
-        if (containsLower == true) {
-            lowerContainer.children[0].src = "./img/check.svg"
-            lowerContainer.children[1].classList.add('valid')
-            lower = true
-        }
-        else {
-            lowerContainer.children[0].src = "./img/cross.svg"
-            lowerContainer.children[1].classList.remove('valid')
-            lower = false
-        }
+    containsLower === true ? setPasswordHint(lowerContainer, "check", "add") : setPasswordHint(lowerContainer, "cross", "remove")
+    containsUpper === true ? setPasswordHint(upperContainer, "check", "add") : setPasswordHint(upperContainer, "cross", "remove")
+    containsSpecial === true ? setPasswordHint(specialContainer, "check", "add") : setPasswordHint(specialContainer, "cross", "remove")
+}
+
+function setPasswordHint(container, status, classStatus) {
+    container.children[0].src = `./img/${status}.svg`
+    classStatus === "add" ? container.children[1].classList.add('valid') : container.children[1].classList.remove('valid')
+}
+
+function checkPasswordsMatch() {
+    if (password.value != passwordConfirm.value) {
+        passwordConfirm.setCustomValidity("invalid")
     }
-    else if (containsUpper != upper) {
-        if (containsUpper == true) {
-            upperContainer.children[0].src = "./img/check.svg"
-            upperContainer.children[1].classList.add('valid')
-            upper = true
-        }
-        else {
-            upperContainer.children[0].src = "./img/cross.svg"
-            upperContainer.children[1].classList.remove('valid')
-            upper = false
-        }
-    }
-    else if (containsSpecial != special) {
-        if (containsSpecial == true) {
-            specialContainer.children[0].src = "./img/check.svg"
-            specialContainer.children[1].classList.add('valid')
-            special = true
-        }
-        else {
-            specialContainer.children[0].src = "./img/cross.svg"
-            specialContainer.children[1].classList.remove('valid')
-            special = false
-        }
+    else if (password.value === passwordConfirm.value) {
+        passwordConfirm.setCustomValidity("")
     }
 }
