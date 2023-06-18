@@ -28,10 +28,8 @@
                 <label for="email" data-help="Please enter a valid email address">Email</label>
             </div>
             <div class="form-container">
-                <input id="postcode" placeholder="Postcode *" 
-                name="postcode" type="text" maxlength="8" 
-                pattern="[A-Za-z]{1,2}[0-9Rr][0-9A-Za-z]? [0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2}" 
-                required>
+                <input id="postcode" placeholder="Postcode *" name="postcode" type="text" maxlength="8" 
+                pattern="[A-Za-z]{1,2}[0-9Rr][0-9A-Za-z]?(\s?[0-9][ABD-HJLNP-UW-Zabd-hjlnp-uw-z]{2})?" required>
                 <label for="postcode" data-help="Please enter a valid UK Postcode">Postcode</label>
             </div>
             <div class="form-container">
@@ -321,6 +319,10 @@
                 pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                 required>
                 <label for="confirm" data-help="Passwords must match and be valid">Confirm Password</label>
+            </div>
+
+            <div class="form-container">
+                <button class="submit-button" form="inputForm" value="Submit">Submit</button>
             </div>
             
         </form>

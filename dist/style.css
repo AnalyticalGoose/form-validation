@@ -39,7 +39,7 @@ body {
 }
 
 dialog[open] {
-    height: 420px;
+    height: 430px;
     width: 400px;
     gap: 20px;
 
@@ -112,6 +112,20 @@ select {
 
 .validation-icon {
     height: 23px;
+}
+
+.submit-button {
+    width: 150px;
+    height: 40px;
+
+    background-color: #fff;
+    border: 2px solid #d8d8d8;
+
+    font-size: 14px;
+}
+
+.submit-button:hover {
+    background-color: #d6d4d4;
 }
 
 span {
